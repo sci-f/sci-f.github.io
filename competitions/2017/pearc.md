@@ -25,4 +25,4 @@ We are looking for fun, interesting, or innovative ways to use containers. Silly
 
 
 
-The judges will be the speakers for the talk at PEARC (@vsoch and @gmkurtzer), and we will choose one or more winners, depending on how many entries we get. If you have absolutely any questions, please [post an issue](https://www.github.com/containers-ftw/containers-ftw.github.io/issues). So what are you waiting for? Show me what you got!
+The judges will be the speakers for the talk at PEARC ([@vsoch](https://www.github.com/vsoch) and [@gmkurtzer](https://www.github.com/gmkurtzer)), and we will choose one or more winners, depending on how many entries we get. If you have absolutely any questions, please [post an issue](https://www.github.com/containers-ftw/containers-ftw.github.io/issues). So what are you waiting for? Show me what you got!
