@@ -21,7 +21,7 @@ We are looking for fun, interesting, or innovative ways to use containers. Silly
 
  - Your container must not require any additional configuration, setup, or special resources. If you need to provide us with special instructions for running (e.g., binding folders, customizing arguments) then you should provide this in the README of the Github repository associated with the container.
  - Containers that do anything malicious will be disqualified.
- - Containers should be no larger than 8000GB.
+ - Containers should be no larger than 8000MB.
 
 
 
