@@ -1,201 +1,115 @@
-# Hosting a Competition
+# Hosting Quick Start
 
-**under development**
-
-This guide will get you started to host your own containers-ftw competition. The general workflow is the following:
+This is the quick start guide to show you how to host your own containers-ftw competition. If you want a more detailed walkthrough, see the [hosting tutorual](hosting-tutorial.md). Note that both of these docs are heavily under development. The general workflow is the following:
 
  1. You publish a competition via a Github repo, and PR to [containers-ftw](https://www.github.com/containers-ftw/containers-ftw.github.io) to post your competition (this page will be added soon). 
  2. Participants enter by way of submitting a pull request (PR) to your repo
  3. The PR is for a Singularity build file (a container) that the continuous integration will run and assess for the metric
  4. The participant(s) that best meet your metric(s) of success win the competition.
 
-
-## Competition Materials
-You must provide the following to your participants:
-
-- **Data**, either hosted with the Github repo, or downloaded at runtime. The organization and instructions for your data will be packaged with the tempate that you choose with the [cftw](https://www.github.com/containers-ftw/containersftw) software. 
-- **Instructions** should be provided with clear description of the dataset, the problem to solve, and the metric of assessment. The level of detail that you provide is dependent on your competition.
-
-The base template to start your competition can be easily obtained with the [containers-ftw](https://www.github.com/containers-ftw/containersftw) command line software.
-
-
-## Competition Metrics via Tests
-The participant is going to be producing some output after his or her analysis that represents an answer to your query. In order to validate the correctness of the format, or assess the output based on a metric of your choosing, we use continuous integration. This is an optimal strategy because it will be run whenever someone forks your competition repo, and then submits a PR to add his or her result.
-
-### Tests
-You should write your tests in the `tests` folder inside the `analysis` folder, and then write as many test commands as you need in the `.travis.yml` file that is provided with your template. For language specific templates, example test commands are provided.
-
-
-## Container Organization
-The base template that is generated for Github is mapped into a Singularity container. We follow a basic organization that we believe is intuitive to find code and data in the containers. The mapping from host (Github base repo provided by [containers-ftw](https://www.github.com/containers-ftw/containersftw) to container looks like the following. Folders that are eventually bound to the host for generating and running analyses are marked with an *:
-
-```
-analysis           ---->          /code/analysis*                    # top level folder for analyses, mapped to host   
-analysis/tests     ---->          /code/analysis/tests               # tests that are run (specified by `.travis.yml`)      
-analysis/helpers   ---->          /code/analysis/helpers             # functions provided by you to get your competitors started
-
-functions          ---->          /code/functions                    # functions for container operations, nothing to see here
-data/input         ---->          /data/input                        # data served with the container, added during build
-data/work          ---->          /data/work*                        # intended for intermediate data files and working
-result             ---->          /result                            # top level for all results in the container
-result/analysis    ---->          /result/analysis*                  # This is where the user is expected to write final output to
-result/web         ---->          /result/web                        # If there is a web component of output
-result/pub         ---->          /result/pub                        # written, publication type documents or other
-```
-
-Optionally, if you require the user to mount the data externally (for example if it's really big), you would specify the shell command to do this mapping:
-
-```
-data/mnt          --->            /data/mnt*
-```
-
-If you do not put data in here, no worries, even if the directory is mounted it's just mounting an empty directory.
-
-
-### Code
-The `/code` folder Is the base of code, and within it `/code/analysis` is where the user's final analysis script (`main.py`) will be copied, along with other functions that are provided by the creator. It looks something like this:
-
-```
-/code
-    /analysis
-        main.py
-    /functions
-```
-
-If you have functions or helpers that you want to give the user, you should add them to the analysis folder, in whatever organization you think appropriate. In the example below, we have provided some utility functions that we give to the user in `main.py` to easily read in the data:
-
-```
-/code
-    /analysis
-        /helpers
-           utils.py
-        main.py
-    /functions
-```
-
-The user has complete control over what happens in `main.py`, and can add any supplementary modules or files to be included. In your competition repo, the user writes his or her code to the folder analysis, and develops the image with this folder mounted. The only requirement is that it accepts the arguments as specified by the competition host.
-
-
-### Data
-The base folder `/data` is intended primarily for inputs and intermediate data products that result from the analysis. 
-
-```
-/data
-   /mnt
-   /input
-   /work
-```
-
-Each of the folders has a specific use case, and the specific format of the data inside depends on the kind of dataset.
-
- - `/input` is where the user would expect to find data provided by the container. This is copied from the repository `/data/input` folder.
- - `/mnt` is where any external data would be mounted
- - `/work` is an intermediate location intended for working. It would be good practice for the user to mount work to write files, and `/code/analysis` for writing the scripts.
-
-
-### Results
-While a result could be considered data, it is fundamentally different in that it is intended to be digested by humans, and not computers. Thus, we take a template-based approach. The raw result file (for example, `.csv` or other) is intended to go in the `/result/analysis` folder. Outputs that are intended to be run with a web server go under web (which is linked to /var/www/html). Any publication or document-type results go under `pub/`
-
-```
-/result
-   /analysis
-   /web
-   /pub
-```
-
-# Generate Your Base
-We will flush this out in more detail as it is developed, but to start you would first install the [cftw](https://www.github.com/containers-ftw/containersftw) command line utility by installing from pip:
+## Step 1: Base Template
+Install the [cftw](https://www.github.com/containers-ftw/containersftw) command line utility by installing from pip:
 
 ```
 pip install cftw
+```
 
-# For the development version, install from Github:
+or for the development version, install from Github:
 
+```
 pip install git+git://github.com/containers-ftw/cftw
 ```
 
-The `cftw` software is now installed on your machine:
+The `cftw` software is now installed on your machine, and you can use it to select a competition base template.
 
 ```
 which cftw
 /home/vanessa/anaconda3/bin/cftw
-```
-
-and we can see its usage:
-
-```
-cftw
-usage: cftw [-h] [--version] [--debug] {init,add} ...
-
-Containers For the Win Base Generator
-
-optional arguments:
-  -h, --help  show this help message and exit
-  --version   show software version
-  --debug     use verbose logging to debug.
-
-commands:
-  containers-ftw generation commands
-
-  {init,add}  generation commands
-For help with an action, type [action] --help
-```
-
-We would first want to generate a base with the `init` command:
-
-```
-cftw init
-Please provide a base template with --template/-t. Available templates are: 
-ubuntu16.04-python2
-continuumio-anaconda3
--------------------------------------------------------------
-For help with init, cftw init --help
-```
-
-It's telling us that it needs a template, and an output folder. Let's provide a template. First I am going to run it in a random location on my computer. The software is conservative in that it won't overwrite things in a non-empty directory:
-
-```
 cftw init --template ubuntu16.04-python2
-ERROR Directory is not empty - will not risk overwrite!
-Please make an empty folder and run cftw init again.
 ```
 
-Instead, we should be more careful and start in an empty folder.
+This will generate a basic file structure that you can add content to.
 
 ```
-mkdir competition
-cd competition
+ubuntu16.04-python2/
+├── analysis
+│   ├── helpers
+│   │   └── README.md
+│   ├── results
+│   │   └── README.md
+│   ├── README.md
+│   └── tests
+│       └── README.md
+├── data
+│   ├── input
+│   │   └── README.md
+│   └── mnt
+│       └── README.md
+├── README.md
+└── Singularity
 ```
 
-When we empty the folder, generation is ok!
+
+## Step 2: Labels and Metadata
+
+You should use the `%labels` section of the Singularity build file to define metadata for your competition.
 
 ```
-cftw init --template ubuntu16.04-python2
-
-DEBUG Starting base generation in /home/vanessa/Documents/Dropbox/Code/shub/ftw/containersftw/test
-DEBUG Copying folder template ubuntu16.04-python2 to test
-test/
-    ubuntu16.04-python2/
-        README.md
-        .travis.yml
-        Singularity
-
-DEBUG Finished generation.
+CONTAINERSFTW_TEMPLATE ubuntu16.04-python2
+CONTAINERSFTW_COMPETITION_HOST containersftw
+CONTAINERSFTW_COMPETITION_NAME flavours-of-physics-ftw
 ```
 
-More to come soon! Still working on this.
-
-
-# Participating in a Contest
-The user should be able to build your provided container without a hitch - it would just be missing the `main.py` script with the participant's implemented analysis to produce some expected result. The instructions will vary slightly by container, but generally will look something like the following. First, the user will fork and clone the competition repo:
+In the `%environment` section you should define the bases for your data, results, and code, if they happen to be different from the default. For example, below we are providing data in the container, so we point the `CONTAINERSFTW_DATA` to be in `/data/input`.  If you are using a mount, this would be `/data/mnt`. If you are using both, then you can specify `/data`.
 
 ```
-singularity create --size 2000 analysis.img
-sudo singularity bootstrap analysis.img Singularity
+%environment
+CONTAINERSFTW_DATA=/data/input
+CONTAINERSFTW_RESULT=/result/analysis
+CONTAINERSFTW_WORK=/code/analysis
+export CONTAINERSFTW_DATA
+export CONTAINERSFTW_RESULT
+export CONTAINERSFTW_WORK
 ```
 
-And then connect to the container with shell and binding required directories
+You should then write clear instructions for your participant in the `README.md` Minimally you should include:
 
-```
-singularity shell -B analysis:/code/analysis -B /tmp:/data/mnt analysis.img
-```
+ - Instructions to fork and clone the repo, and build the image (these are provided in the templates)
+ - An overview for the background of the competition, the metrics/goals, and any relevant rules
+ - A pointer to the user to build and then write code in the `main.py`.
+
+
+## Step 3: Data
+You have few options for where data can be obtained, and you can choose based on the size of the data.
+
+  - **inside container**: data you want built into the container at `/data/input` can be put into `data/input`
+  - **mapped to container**: data you want the user to (optionally download from somewhere) and mount you can instruct the user to add a bind to `/data/mnt` in the container from a location on the host. If you want the download to occur automatically for the user, you can have it done in the `%setup` section to the `$SINGULARITY_ROOTFS` 
+
+
+## Step 4: Code
+
+### Analysis 
+The entire base of code will live in the analysis directory, mapped into the container at `/code/analysis` as a bind point to make it available on the participant's host machine. Within analysis, you should do the following:
+
+  - **main.py**: is where the user will write their primary code. You should import example / base libraries, show loading data (ideally with helper functions) and how to run and save a result how you want it.
+ - **metrics.py**: is a base of evaluation metrics and checks, to be used by the user and during continuous integration testing to evaluate a result.
+
+
+### Helpers
+The `analysis/helpers` folder is intended to house helpful functions for loading, finding, and saving data. It's up to you how much you want to provide, but minimally it's nice to give the participant the following:
+
+ - **data.py**: functions for loading and listing datasets.
+ - **results.py**: functions for saving data to filenames and locations where it must be for final testing
+ - **logger.py**: an intuitive logger (`from logger import bot; bot.info("This is information!")` that you can show the user in the `main.py` and advise to add logging when needed.
+
+
+
+This means that in the container, the user can `ls $CONTAINERSFTW_DATA` and see the data that is provided. Or save their output to `CONTAINERSFTW_RESULT` without thinking about what that actually maps to.
+
+
+## Step 5 Tests
+Once the user has forked, cloned, and added code to be evaluated by your metric, it needs to be tested. Testing comes down to what happens during continuous integration, and by default we run a set of python scripts in the `analysis/tests` folder that will simply look for output files generated in the result folder. 
+
+**under development**
+
+Finally, the test result is submit to the entry of the user in the competition, also by way of the cftw software (also under development).

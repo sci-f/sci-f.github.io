@@ -7,4 +7,4 @@ We are announcing our first competition, the winner(s) to be announced at the [P
 
 
 ## Hosting
-We are starting the documentation and work to allow you to host competitions for crowd sourced reproducible science. This is under development, but you can sniff around what we are planning and learn how it will be possible to [host a competition](hosting.md)
+We are starting the documentation and work to allow you to host competitions for crowd sourced reproducible science. This is under development, but you can sniff around what we are planning and learn how it will be possible to [host a competition](hosting.md). For a complete and detailed walkthrough, go through our [hosting tutorial](hosting-tutorial.md) that transforms a Kaggle Competition into a competitive container.
