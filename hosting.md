@@ -1,6 +1,6 @@
 # Hosting Quick Start
 
-This is the quick start guide to show you how to host your own containers-ftw competition. If you want a more detailed walkthrough, see the [hosting tutorual](hosting-tutorial.md). Note that both of these docs are heavily under development. The general workflow is the following:
+This is the quick start guide to show you how to host your own containers-ftw competition. If you want a more detailed walkthrough, see the [hosting tutorial](hosting-tutorial.md). Note that both of these docs are heavily under development. The general workflow is the following:
 
  1. You publish a competition via a Github repo, and PR to [containers-ftw](https://www.github.com/containers-ftw/containers-ftw.github.io) to post your competition (this page will be added soon). 
  2. Participants enter by way of submitting a pull request (PR) to your repo
