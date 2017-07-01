@@ -103,8 +103,4 @@ This means that in the container, the user can `ls $CONTAINERSFTW_DATA` and see 
 
 
 ## Step 5 Tests
-Once the user has forked, cloned, and added code to be evaluated by your metric, it needs to be tested. Testing comes down to what happens during continuous integration, and by default we run a set of python scripts in the `analysis/tests` folder that will simply look for output files generated in the result folder. 
-
-**under development**
-
-Finally, the test result is submit to the entry of the user in the competition, also by way of the cftw software (also under development).
+Once the user has forked, cloned, and added code to be evaluated by your metric, it needs to be tested. Testing comes down to what happens during continuous integration, and by default we run a set of python scripts in the `analysis/tests` folder that will simply look for output files generated in the result folder.  The test result is submit to the entry of the user in the competition, also by way of the cftw software (also under development).

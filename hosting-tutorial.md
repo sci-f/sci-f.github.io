@@ -289,8 +289,47 @@ submission = save_result(result)
 Generally, you want to provide enough structure to conceal (potentially) annoying things like knowing about the delimiters of your data to load, or whether to include columns or not. Whatever your strategy is, make sure that if you don't have any helper functions, your `main.py` has examples for how the user can find and load data.
 
 
-### Tests
-Finally, if you look at the `.travis.yml`, the tests are located in `analysis/tests`, and include basic functions to look if the result file exists, test that it loads, and validate fields. This should be where you score it in some way, and **TBD** the result will be uploaded to the score board.
+### Continuous Integration
+Finally, if you look at the `.travis.yml`, the tests are located in `analysis/tests`, and include basic functions to look if the result file exists, test that it loads, and validate fields. This should be where you score it in some way, and **TBD** the result will be uploaded to the score board. If you download substantial data for your analysis, you should edit the `.travis.yml` to cache the data directories:
+
+```
+cache:
+  directories:
+  - $TRAVIS_BUILD_DIR/data/input
+```
+
+Generally, the steps for testing are to install Singularity on the testing node:
+
+```
+before_install:
+  - sudo sed -i -e 's/^Defaults\tsecure_path.*$//' /etc/sudoers
+  - cd /tmp && git clone -b development https://www.github.com/singularityware/singularity.git && cd singularity
+  - echo $PWD && ls
+  - ./autogen.sh && ./configure --prefix=/usr/local && make && sudo make install
+  - cd $TRAVIS_BUILD_DIR/
+```
+
+build the participant's image, just as he or she did:
+
+```
+install:
+  - singularity create --size 8000 container.ftw
+  - sudo singularity bootstrap container.ftw Singularity 
+```
+
+and then run the image to produce the submission data file:
+
+```
+script:
+  - singularity run -B data/input:/data/input -B $TRAVIS_BUILD_DIR/analysis:/code --pwd /code container.ftw
+```
+
+and test it!
+
+```
+  - singularity exec -B data/input:/data/input -B $TRAVIS_BUILD_DIR/analysis:/code --pwd /code container.ftw python -m unittest discover -s /code/tests/ -p '[t|T]est*.py'
+
+```
 
 
 ## Environment
