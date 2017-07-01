@@ -7,6 +7,13 @@ This is the detailed guide and tutorial to show you how to host your own contain
  3. The PR is for a Singularity build file (a container) that the continuous integration will run and assess for the metric
  4. The participant(s) that best meet your metric(s) of success win the competition.
 
+A quick demo of this tutorial's generated "competitive container" is below, and on [asciinema.org](https://asciinema.org/a/127068?speed=3). Keep reading for the details!
+
+<script src="assets/js/asciinema-player.js"></script>
+<link rel="stylesheet" href="assets/css/asciinema-player.css"/>
+
+<asciinema-player src="assets/asciicast/physics-ftw.json" poster="data:text/plain,Competitive Container Tutorial Run" title="Competitive Container Tutorial Run" author="vsochat@stanford.edu" cols="80" rows="24" preload="true" font-size="small" speed="3.0" theme="asciinema"></asciinema-player>
+
 
 # Background
 
