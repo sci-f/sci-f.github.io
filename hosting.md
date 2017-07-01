@@ -12,12 +12,7 @@ Install the [cftw](https://www.github.com/containers-ftw/containersftw) command 
 
 ```
 pip install cftw
-```
-
-or for the development version, install from Github:
-
-```
-pip install git+git://github.com/containers-ftw/cftw
+pip install git+git://github.com/containers-ftw/cftw # development
 ```
 
 The `cftw` software is now installed on your machine, and you can use it to select a competition base template.
@@ -25,13 +20,13 @@ The `cftw` software is now installed on your machine, and you can use it to sele
 ```
 which cftw
 /home/vanessa/anaconda3/bin/cftw
-cftw init --template ubuntu16.04-python2
+cftw init --template continuumio-anaconda3
 ```
 
 This will generate a basic file structure that you can add content to.
 
 ```
-ubuntu16.04-python2/
+continuumio-anaconda3/
 ├── analysis
 │   ├── helpers
 │   │   └── README.md
@@ -55,7 +50,7 @@ ubuntu16.04-python2/
 You should use the `%labels` section of the Singularity build file to define metadata for your competition.
 
 ```
-CONTAINERSFTW_TEMPLATE ubuntu16.04-python2
+CONTAINERSFTW_TEMPLATE continuumio-anaconda3
 CONTAINERSFTW_COMPETITION_HOST containersftw
 CONTAINERSFTW_COMPETITION_NAME flavours-of-physics-ftw
 ```
@@ -65,8 +60,8 @@ In the `%environment` section you should define the bases for your data, results
 ```
 %environment
 CONTAINERSFTW_DATA=/data/input
-CONTAINERSFTW_RESULT=/result/analysis
-CONTAINERSFTW_WORK=/code/analysis
+CONTAINERSFTW_RESULT=/code/results
+CONTAINERSFTW_WORK=/code
 export CONTAINERSFTW_DATA
 export CONTAINERSFTW_RESULT
 export CONTAINERSFTW_WORK
@@ -89,10 +84,11 @@ You have few options for where data can be obtained, and you can choose based on
 ## Step 4: Code
 
 ### Analysis 
-The entire base of code will live in the analysis directory, mapped into the container at `/code/analysis` as a bind point to make it available on the participant's host machine. Within analysis, you should do the following:
+The entire base of code will live in the analysis directory, mapped into the container at `/code` as a bind point to make it available on the participant's host machine. Within analysis, you should do the following:
 
   - **main.py**: is where the user will write their primary code. You should import example / base libraries, show loading data (ideally with helper functions) and how to run and save a result how you want it.
- - **metrics.py**: is a base of evaluation metrics and checks, to be used by the user and during continuous integration testing to evaluate a result.
+  - **metrics.py**: is a base of evaluation metrics and checks, to be used by the user and during continuous integration testing to evaluate a result.
+  - **tests/**: is the testing folder, and you should write the tests necessary to first test for the existence and valid formatting of the result, and then submit the result to the competition portal (TBD).
 
 
 ### Helpers
@@ -101,7 +97,6 @@ The `analysis/helpers` folder is intended to house helpful functions for loading
  - **data.py**: functions for loading and listing datasets.
  - **results.py**: functions for saving data to filenames and locations where it must be for final testing
  - **logger.py**: an intuitive logger (`from logger import bot; bot.info("This is information!")` that you can show the user in the `main.py` and advise to add logging when needed.
-
 
 
 This means that in the container, the user can `ls $CONTAINERSFTW_DATA` and see the data that is provided. Or save their output to `CONTAINERSFTW_RESULT` without thinking about what that actually maps to.
