@@ -12,7 +12,7 @@ The prizes will be awarded in person at the [PEARC 2017 conference](https://www.
 
  1. First, add your container to build on [Singularity Hub](https://www.singularity-hub.org). We do this so that all users will be using the same build environments, and a link to their container will also link to the build specification file and Github repo.
  2. When you are content with your container, [fill out this form](https://goo.gl/forms/5SNWnGbUpBAjVneq1) to enter the competition. If you cannot attend, be sure to give us the contact for someone in attendence to claim your prize. If you are not in attendance, we will still show your container to an audience of over > 100 people.
- 3. The deadling for entering containers is **midnight PST on Sunday, July 2nd**.
+ 3. The deadline for entering containers is **midnight PST on Thursday, July 6th** (yes we have extended due to the holiday!).
 
 
 ## How does it work?
