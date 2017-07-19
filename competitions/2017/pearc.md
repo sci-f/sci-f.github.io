@@ -1,6 +1,6 @@
 # Show Me What You Got!
 
-Congratulations to our winner [David Godlove](https://github.com/GodloveD) for his `lolcow`, who presented a simple container that fit the spirit of the competition perfectly! Shout outs to Stefan Kombrink for a close second place with his [multinode ssh wrapper](https://singularity-hub.org/demos/6/). And here we have, `lolcow` in all its glory!
+Congratulations to our winner [David Godlove](https://github.com/GodloveD) for his `lolcow`, a simple container that fit the spirit of the competition perfectly! Shout outs to Stefan Kombrink for a close second place with his [multinode ssh wrapper](https://singularity-hub.org/demos/6/). And here we present, `lolcow` in all its cow-y glory!
 
 ![lolcow.gif](lolcow.gif)
 
