@@ -49,6 +49,7 @@ Everyone will be a little happier with an lolcow in their life, for messages of 
 
 ![winnersnacks.png](winnersnacks.png)
 
+Keep your ears open for our next contest announcement, coming later in the Fall. If you want to participate in the development of `containers-ftw` please [reach out](https://www.github.com/containers-ftw)
 
 # Competition Announcement
 
