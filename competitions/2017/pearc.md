@@ -1,5 +1,57 @@
 # Show Me What You Got!
 
+Congratulations to our winner [David Godlove](https://github.com/GodloveD) for his `lolcow`, who presented a simple container that fit the spirit of the competition perfectly! Shout outs to Stefan Kombrink for a close second place with his [multinode ssh wrapper](https://singularity-hub.org/demos/6/). And here we have, `lolcow` in all its glory!
+
+![lolcow.gif](lolcow.gif)
+
+Want to play with the `lolcow`? It works in a single command! You can use Docker or Singularity, give this a whirl:
+
+```
+singularity run docker://godlovedc/lolcow
+Docker image path: index.docker.io/godlovedc/lolcow:latest
+Cache folder set to /home/vanessa/.singularity/docker
+Creating container runtime...
+ _________________________________________
+/ Always do right. This will gratify some \
+| people and astonish the rest.           |
+|                                         |
+\ -- Mark Twain                           /
+ -----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+or better yet, pull it to you computer so you can have the lolcow in all it's glory!
+
+```
+./lolcow.img 
+ _____________________________________
+/ Someone whom you reject today, will \
+\ reject you tomorrow.                /
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+```
+
+You can also run directly with docker, but you won't get any color output:
+
+```
+docker run godlovedc/lolcow
+```
+
+Everyone will be a little happier with an lolcow in their life, for messages of wisdom on demand! Congratulations to Dave, he (and his kids will be appreciative) will be receiving some glorious container snacks.
+
+![winnersnacks.png](winnersnacks.png)
+
+
+# Competition Announcement
+
 ![showme.png](showme.png)
 
 We are announcing our first competition, starting now! And it's a simple task. You must create a [Singularity](http://singularity.lbl.gov) container that is cool, interesting, innovative, or fun. That's it! The prizes are awesome, and we encourage all container expertise (new and old!) to enter.
