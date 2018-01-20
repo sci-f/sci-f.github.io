@@ -1,0 +1,23 @@
+  - title: Abstract
+    url: "/"
+    slug: abstract
+
+  - title: Goals
+    url: "/goals"
+    slug: goals
+
+  - title: Specification
+    url: "/specification"
+    slug: specification
+
+  - title: Tutorials
+    url: "/tutorials"
+    slug: tutorials
+
+  - title: Examples
+    url: "/examples"
+    slug: examples
+
+  - title: Community
+    url: "/community"
+    slug: community
