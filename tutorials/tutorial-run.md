@@ -146,8 +146,8 @@ For any command (e.g., run, exec) for which you are passing commands from the ho
 |---------|--------------------------------|----------------------------------------|
 | `[e]`   | an environment variable prefix | `[e]OMG` --> `$OMG`                    |
 | `[pipe]`| pipe (usually `|`)             | cat input.txt [pipe] output.txt        |
-| `[>]`   | output direction (usually `>`) | cat input.txt [>] output.txt           |
-| `[<]`   | input direction (usually `<`)  |                                        |
+| `[out]` | output direction (usually `>`) | cat input.txt [out] output.txt           |
+| `[in]`  | input direction (usually `<`)  |                                        |
 
 ## Run
 The run command will explicity run the script provided in the `apprun` section.  In our example, running `hello-world-echo` will echo "Hello World" to the console.
