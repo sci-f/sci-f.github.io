@@ -142,7 +142,7 @@ From the above, we can see that it's possible to shell into only a context, mean
 The Scientific Filesystem has some special command stickers that (as is true to their name) will stick with your commands and not get lost due to parsing by the host. For any command (e.g., run, exec) for which you are passing commands from the host to the SCIF, it sometimes can be troublesome if a variable gets evaluated on the host that needs to be evaluated in a container with SCIF, for example. To handle this, we have a small set of variables that are passed in, and evaluated internally or relative to the SCIF.
 
 
-| command | description                    | example                                | 
+| sticker | description                    | example                                | 
 |---------|--------------------------------|----------------------------------------|
 | `[e]`   | an environment variable prefix | `[e]OMG` converts to `$OMG`            |
 | `[pipe]`| pipe (usually `|`)             | env `[pipe]` grep _SCIF                |
