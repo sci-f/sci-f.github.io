@@ -138,16 +138,17 @@ Running a standard shell means bash in the context of an app, meaning a subproce
 
 From the above, we can see that it's possible to shell into only a context, meaning the context of an installed app, or the entire filesystem. Physically shelling into a recipe (a file system that doesn't exist yet) doesn't make sense.
 
-## Special Commands
-For any command (e.g., run, exec) for which you are passing commands from the host to the SCIF, it sometimes can be troublesome if a variable gets evaluated on the host that needs to be evaluated in a container with SCIF, for example. To handle this, we have a small set of variables that are passed in, and evaluated internally or relative to the SCIF.
+## Special Command Stickers
+The Scientific Filesystem has some special command stickers that (as is true to their name) will stick with your commands and not get lost due to parsing by the host. For any command (e.g., run, exec) for which you are passing commands from the host to the SCIF, it sometimes can be troublesome if a variable gets evaluated on the host that needs to be evaluated in a container with SCIF, for example. To handle this, we have a small set of variables that are passed in, and evaluated internally or relative to the SCIF.
 
 
 | command | description                    | example                                | 
 |---------|--------------------------------|----------------------------------------|
 | `[e]`   | an environment variable prefix | `[e]OMG` --> `$OMG`                    |
 | `[pipe]`| pipe (usually `|`)             | cat input.txt [pipe] output.txt        |
-| `[out]` | output direction (usually `>`) | cat input.txt [out] output.txt           |
+| `[out]` | output direction (usually `>`) | cat input.txt [out] output.txt         |
 | `[in]`  | input direction (usually `<`)  |                                        |
+
 
 ## Run
 The run command will explicity run the script provided in the `apprun` section.  In our example, running `hello-world-echo` will echo "Hello World" to the console.
