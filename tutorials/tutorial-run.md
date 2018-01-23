@@ -148,6 +148,7 @@ The Scientific Filesystem has some special command stickers that (as is true to 
 | `[pipe]`| pipe (usually `|`)             | env `[pipe]` grep _SCIF                |
 | `[out]` | output direction (usually `>`) | cat input.txt `[out]` output.txt       |
 | `[in]`  | input direction (usually `<`)  |                                        |
+| `[append]`  | append to a file (usually `>>`)  | echo "pancakes" >> recipe.txt    |
 
 
 If you are having trouble with a command and you've tried quotes, these stickers might be exactly what you need! If there is another command being parsed that you want help with, <a href="https://www.github.com/vsoch/scif" target="_blank">let us know</a>.
