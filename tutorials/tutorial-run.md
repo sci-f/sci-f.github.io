@@ -144,11 +144,13 @@ The Scientific Filesystem has some special command stickers that (as is true to 
 
 | command | description                    | example                                | 
 |---------|--------------------------------|----------------------------------------|
-| `[e]`   | an environment variable prefix | `[e]OMG` --> `$OMG`                    |
-| `[pipe]`| pipe (usually `|`)             | cat input.txt [pipe] output.txt        |
-| `[out]` | output direction (usually `>`) | cat input.txt [out] output.txt         |
+| `[e]`   | an environment variable prefix | `[e]OMG` converts to `$OMG`            |
+| `[pipe]`| pipe (usually `|`)             | env `[pipe]` grep _SCIF                |
+| `[out]` | output direction (usually `>`) | cat input.txt `[out]` output.txt       |
 | `[in]`  | input direction (usually `<`)  |                                        |
 
+
+If you are having trouble with a command and you've tried quotes, these stickers might be exactly what you need! If there is another command being parsed that you want help with, <a href="https://www.github.com/vsoch/scif" target="_blank">let us know</a>.
 
 ## Run
 The run command will explicity run the script provided in the `apprun` section.  In our example, running `hello-world-echo` will echo "Hello World" to the console.
