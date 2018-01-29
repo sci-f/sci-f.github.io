@@ -7,7 +7,7 @@ permalink: /
 
 <div style="float:right; margin-bottom:50px; color:#666">
 Version: {{ site.version }}<br>
-Date: 2018-xx-xx
+Date: 2018-01-08
 </div>
 
 <div>

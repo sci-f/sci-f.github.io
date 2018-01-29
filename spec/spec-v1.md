@@ -6,8 +6,13 @@ permalink: /spec-v1
 toc: false
 ---
 
+<div style="float:right; margin-bottom:50px; color:#666">
+Version: {{ site.version }}<br>
+Date: 2018-01-08
+</div>
+
 # Scientific Filesystem (SCIF)
-**version 1.0.0**
+
 
 Authors:
 
