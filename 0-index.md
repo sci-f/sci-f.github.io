@@ -6,7 +6,7 @@ permalink: /
 ---
 
 <div style="float:right; margin-bottom:50px; color:#666">
-Version: {{ site.version }}<br>
+Version: <a href="/spec-v1">{{ site.version }}</a><br>
 Date: 2018-01-08
 </div>
 
