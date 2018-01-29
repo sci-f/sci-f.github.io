@@ -15,4 +15,5 @@ represented by the pull requests that fixed them.
 Versions in parentheses coincide with [specification files](https://sci-f.github.io/spec).
 
 ## [1.0.0](https://sci-f.github.io/spec-v1) (1.0.0)
+ - adding this CHANGELOG.
  - inital formalization of standard into version 1.0.0 documentation from [vsoch.github.io/scif](https://vsoch.github.io/scif)
