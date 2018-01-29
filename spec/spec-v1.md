@@ -2,11 +2,12 @@
 layout: default
 title: Specification for the Scientific Filesystem (scif)
 pdf: true
-permalink: /specification
+permalink: /spec-v1
 toc: false
 ---
 
 # Scientific Filesystem (SCIF)
+**version 1.0.0**
 
 Authors:
 
