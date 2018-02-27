@@ -326,7 +326,7 @@ I could also blindly parse through help files, environments, labels, or any othe
 Once we have previewed, we likely want to install. I'm not a fan of making changes on my host, so I'm going to test doing this inside of a Docker image. The image we will be building in the example below is provided on docker hub:
 
 ```
-docker pull vanessa/scif:latest
+docker pull vanessa/scif:hw
 ```
 
 First we will do it interactively, and then add a few lines to a recipe to do it properly. Here is the interactive version. We will use an miniconda image so we know that it comes with pip to install `scif`. Note that I'm mapping the present working directory to `/tmp` so I have my `hello-world.scif` recipe.
@@ -412,13 +412,13 @@ CMD ["scif"]
 and then we could build that:
 
 ```
-docker build -t vanessa/scif .
+docker build -t vanessa/scif:hw .
 ```
 
 and run it to see the help:
 
 ```
-docker run -it vanessa/scif
+docker run -it vanessa/scif:hw
 ```
 
 We will review more interesting commands and interaction with your SCIF in the next tutorial on how to [run SCIF](tutorial-run.md). This tutorial will finish to show installation in a Singularity container, followed by reverse engineer of a recipe from a SCIF.

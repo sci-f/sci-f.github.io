@@ -30,10 +30,18 @@ Done. Container is at: /home/vanessa/Desktop/scif-cli
 
 
 ## Docker
-For our second container, we are starting with the Dockerized scientific filesystem container that is built in the [preview and install](/tutorial-preview-install#install-scif-in-docker-using-recipe) tutorial. We will use the latest for this example, and you can also see the [tags available](https://hub.docker.com/r/vanessa/scif/tags/) for other versions. First, pull the image:
+For our second container, we are starting with the Dockerized scientific filesystem container that is built in the [preview and install](/tutorial-preview-install#install-scif-in-docker-using-recipe) tutorial. We will use the latest for this example, and you can also see the [tags available](https://hub.docker.com/r/vanessa/scif:hw/tags/) for other versions. First, pull the image:
 
 ```
-docker pull vanessa/scif
+docker pull vanessa/scif:hw
+```
+
+Note that the container `vanessa/scif` is a base without any SCIF installed, but you would use it to install your own SCIF.
+
+```
+FROM vanessa/scif
+ADD recipe.scif /
+RUN scif install /recipe.scif
 ```
 
 What you should understand from the install tutorial is that we (as the *creator* of the container) wrote a recipe, a text file with instructions for interacting with different scientific filesystem software modules ("apps") and then exposed a single entrypoint that is the controller for the different apps. Then we build the container.
@@ -45,7 +53,7 @@ Then the *user* that doesn't have knowledge to the creation is able to interact 
 We can first test the entrypoint. We have just pulled the container, and we know nothing. So we run it.
 
 ```
-docker run vanessa/scif
+docker run vanessa/scif:hw
 ```
 
 ```
@@ -87,7 +95,7 @@ We are familiar with the scientific filesystem, so we can use the `apps` command
 
 
 ```
-docker run vanessa/scif apps
+docker run vanessa/scif:hw apps
 ```
 
 ```
@@ -103,7 +111,7 @@ SCIF [app]              [root]
 We can then ask for help for a particular app. This section is important for the creator to put some time into describing the basic important things that should be known.
 
 ```
-docker run vanessa/scif help hello-world-env
+docker run vanessa/scif:hw help hello-world-env
 ```
 
 ```
@@ -113,7 +121,7 @@ does not have anything other than an environment installed.
 It just defines the environment variable `OMG=TACOS`. Try issuing
 a command to the scif entrypoint to echo this variable:
 scif exec hello-world-env echo [e]OMG
-docker run vanessa/scif exec hello-world-env echo [e]OMG
+docker run vanessa/scif:hw exec hello-world-env echo [e]OMG
 [hello-world-env] executing /bin/echo $OMG
 TACOS
 ```
@@ -126,7 +134,7 @@ We can also inspect an app of interest, which will spit out a metadata structure
 
 
 ```
-docker run vanessa/scif inspect hello-world-env
+docker run vanessa/scif:hw inspect hello-world-env
 ```
 
 ```
@@ -142,7 +150,7 @@ docker run vanessa/scif inspect hello-world-env
             "It just defines the environment variable `OMG=TACOS`. Try issuing",
             "a command to the scif entrypoint to echo this variable:",
             "scif exec hello-world-env echo [e]OMG",
-            "docker run vanessa/scif exec hello-world-env echo [e]OMG",
+            "docker run vanessa/scif:hw exec hello-world-env echo [e]OMG",
             "[hello-world-env] executing /bin/echo $OMG",
             "TACOS"
         ]
@@ -156,7 +164,7 @@ Yes, it really just is an environment, and a help message for it! Now that we've
 We can run the `hello-world-echo` app like this:
 
 ```
-docker run vanessa/scif run hello-world-echo
+docker run vanessa/scif:hw run hello-world-echo
 ```
 
 ```
@@ -168,7 +176,7 @@ The best app is hello-world-echo
 What about our example above with `hello-world-env`? It can be weird trying to pass an environment variable into a container from the host, because it gets evaluated (and then winds up something unexpected or empty!) To help this, with scif we use a modified syntax to pass the variable into the container. We replace `$` with `[e]` so that `$VARIABLE` is `[e]VARIABLE`. Here is an example:
 
 ```
-docker run vanessa/scif exec hello-world-env echo [e]OMG
+docker run vanessa/scif:hw exec hello-world-env echo [e]OMG
 ```
 ```
 ./scif-cli exec hello-world-env echo [e]OMG
@@ -182,7 +190,7 @@ If we had done that with `$` it would have evaluated the variable on our host sh
 You can also execute a command:
 
 ```
-docker run vanessa/scif exec hello-world-echo echo "Another hello!"
+docker run vanessa/scif:hw exec hello-world-echo echo "Another hello!"
 ```
 
 ```
@@ -204,7 +212,7 @@ vanessa@thinkpad:/scif$
 Notice how the path (`$PS1`) in the terminal window changed to `/scif`? The same happens for Docker of course:
 
 ```
-docker run -it vanessa/scif shell
+docker run -it vanessa/scif:hw shell
 WARNING No app selected, will run default ['/bin/bash']
 executing /bin/bash 
 root@1ab15ba4cc3b:/scif
@@ -243,7 +251,7 @@ vanessa@thinkpad:/scif/apps/hello-world-env$
 Notice how we are in the root of `hello-world-env`. It works the same for Docker.
 
 ```
-docker run -it vanessa/scif shell hello-world-env
+docker run -it vanessa/scif:hw shell hello-world-env
 [hello-world-env] executing /bin/bash 
 root@1ab15ba4cc3b:/scif/apps/hello-world-env# echo $OMG
 TACOS
@@ -268,7 +276,7 @@ IPython 6.1.0 -- An enhanced Interactive Python. Type '?' for help.
 ```
 
 ```
-docker run -it vanessa/scif pyshell
+docker run -it vanessa/scif:hw pyshell
 Found configurations for 3 scif apps
 hello-world-env
 hello-world-script
