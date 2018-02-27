@@ -1,7 +1,7 @@
 # Setup
 title:        The Scientific Filesystem
 tagline:      ""
-baseurl:      "https://sci-f.github.io"
+baseurl:      "/"
 paginate:     1
 github:       "https://www.github.com/sci-f/sci-f.github.io/"
 url:          "https://sci-f.github.io/"
