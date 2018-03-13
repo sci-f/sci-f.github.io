@@ -40,6 +40,14 @@ We will start by reviewing the background and rationale for a scientific organiz
 
 We have provided several <a href="https://sci-f.github.io/apps/category/#Example" target="_blank">examples and tutorials</a> for getting started with SCIF. If you have a workflow or container that you'd like to see added, please <a href="https://www.github.com/sci-f/apps/issues" target="_blank">reach out</a>. If you would like to see other ways to contribute, <a href="/community.html#contribute-to-scif">here are some suggestions</a>. This work will remain open for contributions, and early contributions will be represented in an official submission.
 
+### Citation
+If SCIF has been useful to you, please cite our work on [GigaScience](https://academic.oup.com/gigascience/advance-article/doi/10.1093/gigascience/giy023/4931737)!
+
+```
+Vanessa Sochat; The Scientific Filesystem (SCIF), GigaScience, giy023,
+https://doi.org/10.1093/gigascience/giy023
+```
+
 <div>
     <a href="/goals"><button class="next-button btn btn-primary"><i class="fa fa-chevron-right"></i> </button></a>
 </div><br>
