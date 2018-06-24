@@ -186,6 +186,64 @@ TACOS
 
 If we had done that with `$` it would have evaluated the variable on our host shell, and passed nothing into the container (unless in fact `$OMG` was defined on the host)/
 
+
+### Test
+When the recipe has an `%apptest` section for an app, the content is written to a file
+`test.sh` in the metadat folder. In this example application, we have a bash script
+that will print a message and exit with 0 (success) given no argument, or exit
+with a return code set to a provided argument:
+
+```bash
+%apptest hello-world-script
+    echo "Running tests!"
+    if [ $# -eq 0 ]
+        then
+            echo "No arguments supplied, tests pass!"
+            exit 0
+        fi
+    echo "Argument supplied, exiting with ${1}"
+    exit ${1}
+```
+
+Thus, we can test the `hello-world-script` app like this to get a return code of 0:
+
+```bash
+docker run vanessa/scif:hw test hello-world-script
+[hello-world-script] executing /bin/bash /scif/apps/hello-world-script/scif/test.sh
+Running tests!
+No arguments supplied, tests pass!
+
+$ echo $?
+0
+```
+
+And like this to get a non-zero return code (e.g., 255)
+
+```bash
+docker run vanessa/scif:hw test hello-world-script 255
+[hello-world-script] executing /bin/bash /scif/apps/hello-world-script/scif/test.sh 255
+Running tests!
+Argument supplied, exiting with 255
+
+ERROR Return code 255
+$ echo $?
+255
+```
+
+If an app doesn't have tests, it prints this:
+
+```bash
+$ docker run vanessa/scif:hw test hello-world-echo
+No tests defined for this app.
+```
+And for now, I've decided to provide a return code of 1, because it should be encouraged to
+write tests.
+
+```bash
+$ echo $?
+1
+```
+
 ### Exec
 You can also execute a command:
 
