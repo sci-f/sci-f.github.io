@@ -1,6 +1,6 @@
 ---
 layout: default
-title: {{ site.name }}
+title: "The Scientific Filesystem"
 pdf: true
 permalink: /
 ---
