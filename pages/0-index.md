@@ -17,7 +17,7 @@ Date: 2018-01-08
 
 Here we present the Scientific Filesystem (SCIF), an organizational format that supports exposure of executables and metadata for discoverability. The format includes a known *filesystem structure*, a definition for a set of *environment variables* describing it, and *functions* for generation of the variables and interaction with the libraries, metadata, and executables located within. Some quick resources:
 
- - [*[quick start](/tutorial-quick-start)*] or [*[really quick start](/tutorial-really-quick-start)*] tutorials to understand the format.
+ - [quick start](/tutorial-quick-start) or [really quick start](/tutorial-really-quick-start) tutorials to understand the format.
  - [Scientific Filesystem Container Builder](https://sci-f.github.io/builder) a `build` --> `test` --> `deploy` template to quickly turn your analysis scripts into a reproducible container.
 
 ## How does scif related to containers?
