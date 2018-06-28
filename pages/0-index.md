@@ -15,7 +15,10 @@ Date: 2018-01-08
     <h1 style="margin-top:10px">Scientific Filesystem</h1>
 </div><br><br>
 
-Here we present the Scientific Filesystem (SCIF), an organizational format that supports exposure of executables and metadata for discoverability. The format includes a known *filesystem structure*, a definition for a set of *environment variables* describing it, and *functions* for generation of the variables and interaction with the libraries, metadata, and executables located within. [*[quick start](/tutorial-quick-start)*] or [*[really quick start](/tutorial-really-quick-start)*].
+Here we present the Scientific Filesystem (SCIF), an organizational format that supports exposure of executables and metadata for discoverability. The format includes a known *filesystem structure*, a definition for a set of *environment variables* describing it, and *functions* for generation of the variables and interaction with the libraries, metadata, and executables located within. Some quick resources:
+
+ - [*[quick start](/tutorial-quick-start)*] or [*[really quick start](/tutorial-really-quick-start)*] tutorials to understand the format.
+ - [Scientific Filesystem Container Builder](https://sci-f.github.io/builder) a `build` --> `test` --> `deploy` template to quickly turn your analysis scripts into a reproducible container.
 
 ## How does scif related to containers?
 Although scif is not exclusively for containers, in that a container can provide an encapsulated, reproducible environment, the scientific filesystem works optimally when contained. Containers traditionally have one entrypoint, one environment context, and one set of labels to describe it. A container created with a Scientific Filesystem can expose *multiple* entry points, each that includes its own environment, metadata, installation steps, tests, files, and a primary executable script. SCIF thus brings internal modularity and programatic accessibility to encapsulated, reproducible environments.
@@ -36,6 +39,7 @@ We will start by reviewing the background and rationale for a scientific organiz
 
  - [Community](/community): community resources including APIs, version control and testing, and open source forums for tracking issues and discussion related to SCIF and scientific filesystem apps.
  - [Client](https://www.github.io/vsoch/scif): The SCIF client is the quickest start to creating and using scientific filesystems.
+ - [Builder](https://sci-f.github.io/builder) the Scientific Filesystem Container Builder
 
 
 We have provided several <a href="https://sci-f.github.io/apps/category/#Example" target="_blank">examples and tutorials</a> for getting started with SCIF. If you have a workflow or container that you'd like to see added, please <a href="https://www.github.com/sci-f/apps/issues" target="_blank">reach out</a>. If you would like to see other ways to contribute, <a href="/community.html#contribute-to-scif">here are some suggestions</a>. This work will remain open for contributions, and early contributions will be represented in an official submission.
