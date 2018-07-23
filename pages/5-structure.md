@@ -17,7 +17,7 @@ This document reviews the current specification for the Scientific Filesystem. F
 The [environment](#environment) is the means by which a scientific filesystem is interacted with. Upon installation or interaction, these variables are defined to drive further operations. For example, when you create a `scif` container, the variables used to generate the filesystem are maintained with the container for subsequent uses. If the user does not have preference, a set of meaningful defaults is used, making general use of scif quick and easy.
 
 ## 3. Software and Tools
-The Scientific Filesystem provides [software](#software) (a command line utility called `scif`) that can be installed into containers, and then generate and serve as a controller for the entire scientific filesystem when the container is built. See our [examples](/scif/tutorials) for how this works. 
+The Scientific Filesystem provides [software](#software) (a command line utility called `scif`) that can be installed into containers, and then generate and serve as a controller for the entire scientific filesystem when the container is built. See our [examples](/tutorials) for how this works. 
 
 While there are many conventions and tools for organization and control of environments and software, the scientific filesystem is unique in its ease of use and optimized integration with reproducible container technology, and focus on scientific containers.
 
