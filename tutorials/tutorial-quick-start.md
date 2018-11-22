@@ -26,7 +26,7 @@ Done. Container is at: /home/vanessa/Desktop/scif-cli
 # sregistry pull --name scif-cli vsoch/scif:scif
 ```
 
-**Importantly** note that we are pulling the tag `scif`. If you pull latest (e.g., `vsoch/scif` then you will get a container with the scif client installed, but no fliesystem.
+**Importantly** note that we are pulling the tag `scif`. If you pull latest (e.g., `vsoch/scif` then you will get a container with the scif client installed, but no filesystem.
 
 
 ## Docker
