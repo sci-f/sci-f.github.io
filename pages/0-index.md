@@ -38,7 +38,8 @@ We will start by reviewing the background and rationale for a scientific organiz
 ### Resources
 
  - [Community](/community): community resources including APIs, version control and testing, and open source forums for tracking issues and discussion related to SCIF and scientific filesystem apps.
- - [Client](https://www.github.io/vsoch/scif): The SCIF client is the quickest start to creating and using scientific filesystems.
+ - [Python Client](https://www.github.io/vsoch/scif): The SCIF client is the quickest start to creating and using scientific filesystems. Choose this client if you want interactivity, or are more comfortable with Python.
+ - [GoLang Client](https://www.github.io/sci-f/scif-go): is the equivalent GoLang library, intended for integration with other GoLang libraries.
  - [Builder](https://sci-f.github.io/builder) the Scientific Filesystem Container Builder
 
 

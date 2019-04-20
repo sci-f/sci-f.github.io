@@ -17,3 +17,4 @@ Versions in parentheses coincide with [specification files](https://sci-f.github
 ## [1.0.0](https://sci-f.github.io/spec-v1) (1.0.0)
  - adding this CHANGELOG.
  - inital formalization of standard into version 1.0.0 documentation from [vsoch.github.io/scif](https://vsoch.github.io/scif)
+ - added GoLang client link [https://www.github.com/sci-f/scif-go](https://www.github.com/sci-f/scif-go)
