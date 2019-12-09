@@ -235,7 +235,8 @@ A client, in that it is a more advanced integration, must also follow the integr
 
 
 #### Recipe Parsing
-A parser of a recipe should be able to read chunks of text and return a data structure that includes a dictionary of app settings, each indexed by the app name, and the next level having sections, each a list of the commands from the file. 
+
+A parser of a recipe should be able to read chunks of text and return a data structure that includes a dictionary of app settings, each indexed by the app name, and the next level having sections, each a list of the commands from the file. The ordering that the sections are presented, in terms of apps that are discovered first, should be preserved. For example, if app "foo" has a section for an install that is discovered first, an app "bar" with an install section should be run after. If an app "red" has an environment section that comes before an app "blue" install section, by way of being discovered first in the recipe, the sections for "red" will be processed first, even if the install section for red came after blue's.
 
  - comments should be removed
  - illegal characters or uppercase in app names is not allowed
