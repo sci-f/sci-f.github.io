@@ -334,7 +334,7 @@ First we will do it interactively, and then add a few lines to a recipe to do it
 ```
 $ docker run -v $PWD:/tmp -it continuumio/miniconda3 /bin/bash
 $ pip install scif
-$ scif install hello-world.scif
+$ scif install /tmp/hello-world.scif
 Installing base at /scif
 + apprun hello-world-echo
 + appenv hello-world-echo
