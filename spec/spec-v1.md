@@ -6,9 +6,11 @@ permalink: /spec-v1
 toc: false
 ---
 
+
 <div style="float:right; margin-bottom:50px; color:#666">
 Version: {{ site.version }}<br>
-Date: 2018-01-08
+Date: 2021-02-21
+Minor Version: 1.1
 </div>
 
 # Scientific Filesystem (SCIF)
@@ -126,11 +128,13 @@ The scif recipe is the primary method by which a user from the SC can define and
 The recipe itself is a text file that must have extension `.scif`, and can serve as input to clients and integrations for SCIF.
 
 #### Sections
+
  - `%appinstall` corresponds to executing commands within the folder to install the 
 application. The writer of the recipe should expect the commands to be executed in `$SCIF_APPROOT`, and thus write final outputs to `$SCIF_APPBIN` that is located at `$SCIF_APPROOT`/bin
  - `%apphelp` is written as a file called `runscript.help` in the application's metadata folder, where a client knows where to find it.
  - `%apprun` is also written as a file called runscript in the application's metadata 
 folder, and again looked for when the user asks to run the software.
+ - `%appstart` is similar to run, but targets the startscript. In layman's terms, a start would be the entrypoint for a service, and a run the default entrypoint.
  - `%applabels` will write a `labels.json` in the application's metadata 
 folder, allowing for application specific labels. 
  - `%appenv` will write an environment file in the application's metadata folder (`environment.sh`), allowing for definition of application specific environment variables. These variables are sourced when the application is active.
@@ -189,6 +193,7 @@ SCIF does not enforce or state how the container creator should use the data fol
 | SCIF_APPMETA | /scif/apps/example/scif | the metadata folder |
 | SCIF_APPHELP | /scif/apps/example/scif/runscript.help | a text file with help to print for the user to the terminal | 
 | SCIF_APPRUN | /scif/apps/example/scif/runscript | the commands to run as the app entrypoint |
+| SCIF_APPSTART | /scif/apps/example/scif/startscript | the start script (if provided) for an app |
 | SCIF_APPTEST | /scif/apps/example/scif/test | the commands to run to test the app |
 | SCIF_APPLABELS | /scif/apps/example/scif/labels.json | a key:value json lookup dictionary of labels |
 | SCIF_APPENV | /scif/apps/example/scif/environment.sh | a shell script to source for the software app environment |
@@ -209,6 +214,7 @@ With the convention above, any tool that interacts with SCIF could, for example,
 | SCIF_APPMETA_sleeper | /scif/apps/sleeper/scif | the metadata folder |
 | SCIF_APPHELP_sleeper | /scif/apps/sleeper/scif/runscript.help | a text file with help to print for the user to the terminal | 
 | SCIF_APPRUN_sleeper | /scif/apps/sleeper/scif/runscript | the commands to run as the app entrypoint |
+| SCIF_APPSTART_sleeper | /scif/apps/sleeper/scif/startscript | startscript for the app |
 | SCIF_APPTEST_sleeper | /scif/apps/sleeper/scif/test | the commands to run to test the app |
 | SCIF_APPLABELS_sleeper | /scif/apps/sleeper/scif/labels.json | a key:value json lookup dictionary of labels |
 | SCIF_APPENV_sleeper | /scif/apps/sleeper/scif/environment.sh | a shell script to source for the software app environment |
@@ -218,9 +224,11 @@ With the convention above, any tool that interacts with SCIF could, for example,
 This strategy ensures that any application built to have applications interact (e.g., a container installed with several steps that internally work together) can easily reference another application within the same container without knowing the exact path. Further, it ensures that entire spaces of environment variables (e.g., all application help text files) can be revealed by way of discovering environment variables that match a particular pattern.
 
 #### Additional Variables
+
 Additional variables are appropriate for integrations to define, but must begin with `SCIF_` to remain in the scientific filesystem namespace. This also ensures that SCIF, when installed alongside other software and environments, can have its environemnt settings isolated by way of filtering down based on a common prefix.
 
 ### Integration Requirements
+
 The following sections detail requirements for integrations (third party software that uses SCIF) that are distinguished from clients (a controller or generator of a SCIF) because they don't necessarily need to create a SCIF, but just interact with one.
 
 #### Initialization
@@ -318,10 +326,12 @@ Any integration or tool that is considered a client and implements SCIF must pro
  - **optional** an ability to validate the correctness of a recipe or structure of a SCIF
 
 #### Commands
+
 The minimal set of functions for the controlled must support the following higher level commands. We use the controller name `ctrl` in the examples below, and suggested action names:
 
  * **listing** the UA must, with one command (e.g., "apps" or "list" or "apps.list" are recommended but not enforced) show all the software apps installed in a SCIF. E.g., `ctrl apps` or `ctrl apps <container>`.
  * **run** the UA must provide a means for the user to execute the entrypoint for a chosen app (the `apprun` section from the recipe), e.g., `ctrl run example`. For a container, running the container in context of the app should direct to some central entrypoint that then can forward to the targeted app. If no specific apps are provided, the target should end in a reasonable default. 
+ * **start** akin to "run," the UA can optionally provide a means for the user to execute the start script for a chosen app (the `appstart` section from the recipe), e.g., `ctrl start example`. Since start is optional, the command can be provided from a subcommand or not provided at all.
  * **test** if an app has an `apptest` section defined, the UA must run the tests for the targeted app when the user specifies a test command.
  * **inspect**: if an app has any metadata (labels, environment, help) coinciding with the same sections in the recipe prefixed with `app` then the integration must provide some kind of inspect command.
  * **shell**: if applicable (e.g., containers) provide an entrypoint to an interactive shell where software app of choice is active (or none are active).
