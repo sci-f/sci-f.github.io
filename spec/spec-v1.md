@@ -9,7 +9,7 @@ toc: false
 
 <div style="float:right; margin-bottom:50px; color:#666">
 Version: {{ site.version }}<br>
-Date: 2021-02-21
+Date: 2023-02-24
 Minor Version: 1.1
 </div>
 
